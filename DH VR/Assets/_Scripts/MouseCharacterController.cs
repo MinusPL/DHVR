@@ -24,6 +24,8 @@ public class MouseCharacterController : MonoBehaviour {
     private void Awake() {
         m_CameraTransform = GetComponentInChildren<Camera>().transform;
         m_Controller = GetComponent<CharacterController>();
+
+        Cursor.lockState = CursorLockMode.Locked;
     }
 
     private void Update() {
@@ -45,6 +47,18 @@ public class MouseCharacterController : MonoBehaviour {
             m_GrabbedItem = m_PointedItem;
             m_GrabbedItem.Highlight(false);
             m_GrabbedItem.Grab(m_GrabHook);
+        }
+
+        if (Input.GetMouseButtonDown(1) && m_GrabbedItem) {
+            m_GrabbedItem.Release();
+            m_GrabbedItem = null;
+        }
+
+        if (Input.GetMouseButtonDown(0) && m_GrabbedItem) {
+            var gun = m_GrabbedItem.GetComponent<Gun>();
+            if (gun) {
+                gun.Fire();
+            }
         }
     }
 

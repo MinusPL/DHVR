@@ -33,5 +33,10 @@ public class Grabable : MonoBehaviour {
 
     public void Release() {
         transform.parent = null;
+        
+        if (m_Body)
+            m_Body.isKinematic = false;
+        if (m_Collider)
+            m_Collider.enabled = true;
     }
 }
