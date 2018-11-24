@@ -42,6 +42,13 @@ public class MouseCharacterController : MonoBehaviour {
                 m_PointedItem.Highlight(true);
             }
         }
+        
+        if (Input.GetMouseButtonDown(0) && m_GrabbedItem) {
+            var gun = m_GrabbedItem.GetComponent<Gun>();
+            if (gun) {
+                gun.Fire();
+            }
+        }
 
         if (Input.GetMouseButtonDown(0) && m_PointedItem) {
             m_GrabbedItem = m_PointedItem;
@@ -52,13 +59,6 @@ public class MouseCharacterController : MonoBehaviour {
         if (Input.GetMouseButtonDown(1) && m_GrabbedItem) {
             m_GrabbedItem.Release();
             m_GrabbedItem = null;
-        }
-
-        if (Input.GetMouseButtonDown(0) && m_GrabbedItem) {
-            var gun = m_GrabbedItem.GetComponent<Gun>();
-            if (gun) {
-                gun.Fire();
-            }
         }
     }
 

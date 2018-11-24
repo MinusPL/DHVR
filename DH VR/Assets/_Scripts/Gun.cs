@@ -10,6 +10,15 @@ public class Gun : MonoBehaviour {
 
     public void Fire() {
         StartCoroutine(HandleEffects());
+        
+        Ray ray = new Ray(transform.position, transform.forward);
+        RaycastHit hit;
+        if (Physics.Raycast(ray, out hit)) {
+            var damageable = hit.collider.GetComponent<Damageable>();
+            if (damageable) {
+                damageable.Damage(1);
+            }
+        }
     }
 
     IEnumerator HandleEffects() {
