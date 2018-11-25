@@ -2,10 +2,13 @@
 using System.Collections.Generic;
 using UnityEditor.ShaderGraph;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class Damageable : MonoBehaviour {
 
     public float m_MaxHealth = 1;
+
+    public UnityEvent m_OnDeath;
 
     private float m_CurrentHealth;
 
@@ -22,6 +25,7 @@ public class Damageable : MonoBehaviour {
     }
 
     void Death() {
+        m_OnDeath.Invoke();
         Destroy(gameObject);
     }
 }
