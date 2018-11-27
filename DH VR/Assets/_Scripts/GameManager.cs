@@ -14,6 +14,7 @@ public class GameManager : MonoBehaviour {
 
     private void Awake() {
         DuckController.OnDuckDeath += OnDuckKill;
+        DuckController.OnDuckFlee += OnDuckKill;
     }
 
     private void Start() {
@@ -57,6 +58,8 @@ public class GameManager : MonoBehaviour {
             m_DucksLeft--;
         }
         Debug.Log("Stage Start");
+
+        
 
     }
 
