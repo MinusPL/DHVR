@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class DuckSpawner : MonoBehaviour {
     public Vector3 m_MovementBoxSize;
+    public Transform m_SpawnOrigin;
+    public Vector2 m_SpawnPlaneSize;
     public DuckController m_DuckPrefab;
 
 
@@ -18,18 +20,22 @@ public class DuckSpawner : MonoBehaviour {
             waypoints.Add(point);
         }
 
-        float spawnX = Random.Range(-m_MovementBoxSize.x, m_MovementBoxSize.x);
-        float spawnZ = Random.Range(-m_MovementBoxSize.z, m_MovementBoxSize.z);
-        var spawnPoint = new Vector3(spawnX, -m_MovementBoxSize.y, spawnZ)/2f + transform.position;
+        float spawnX = Random.Range(-m_SpawnPlaneSize.x, m_SpawnPlaneSize.x);
+        float spawnZ = Random.Range(-m_SpawnPlaneSize.y, m_SpawnPlaneSize.y);
+
+        var spawnPoint = new Vector3(spawnX, 0, spawnZ) / 2f + m_SpawnOrigin.position;
         var duck = Instantiate(m_DuckPrefab, spawnPoint, Quaternion.identity);
         duck.Initialize(waypoints);
         duck.m_Speed = duckSpeed;
-        
+
         return duck;
     }
 
 
     private void OnDrawGizmos() {
         Gizmos.DrawWireCube(transform.position, m_MovementBoxSize);
+        Gizmos.color = Color.green;
+        if (m_SpawnOrigin != null)
+            Gizmos.DrawWireCube(m_SpawnOrigin.position, new Vector3(m_SpawnPlaneSize.x, 0, m_SpawnPlaneSize.y));
     }
 }

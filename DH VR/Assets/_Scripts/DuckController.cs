@@ -21,7 +21,7 @@ public class DuckController : MonoBehaviour {
         var dir = (target - transform.position).normalized;
 
         transform.position += dir * m_Speed * Time.deltaTime;
-        transform.rotation = Quaternion.LookRotation(target);
+        transform.LookAt(target);
         
         if (Vector3.SqrMagnitude(transform.position - target) < m_NextWaypointTreshold * m_NextWaypointTreshold) {
             m_CurrentWaypointIndex++;

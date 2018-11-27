@@ -14,4 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   AllDucksCount: 5
   DucksPerStage: 1
+  DucksToNextRound: 5
   DucksSpeed: 5
