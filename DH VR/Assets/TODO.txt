@@ -1,0 +1,29 @@
+- GameManager
+    - Stages
+    - max ducks per stage
+    - waves per stage
+    - max ammo per stage
+    - difficulty change
+
+- Duck !
+    - Waypoints
+    - Waypoint movement
+    - Animations
+
+- Duck Spawner 
+
+- Score Manager
+    - On Duck Kill
+    - Based on duck lifetime 
+    - Based on fired bullets
+
+- More interactions 
+
+Each round consists of a total of ten targets to shoot. Depending on the game mode the player selects prior to beginning play, 
+one or two targets will appear on the screen at any given time and the player has three shots, or attempts, to hit them 
+before they disappear.[6]
+
+The player is required to successfully shoot a minimum number of targets in order to advance to the next round; failure will result in a game over. 
+The difficulty increases as the player advances to higher rounds; targets will move faster and the minimum number of targets to shoot will increase. 
+The player receives points upon shooting a target and will also receive bonus points for shooting all ten targets in a single round. Duck Hunt keeps track of the players' 
+highest score for all games played in a single session; it is lost, however, upon shutting the game off.
