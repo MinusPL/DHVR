@@ -3,34 +3,36 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class DuckController : MonoBehaviour {
-    public float m_NextWaipointTreshold;
+    public float m_NextWaypointTreshold;
     public float m_Speed;
 
     public static event System.Action<DuckController> OnDuckDeath;
+    public static event System.Action<DuckController> OnDuckFlee;
 
-    private List<Vector3> m_Waipoints;
-    private int m_CurrentWaitpointIndex;
+    private List<Vector3> m_Waypoints;
+    private int m_CurrentWaypointIndex;
 
-    public void Initialize(List<Vector3> waipoints) {
-        m_Waipoints = waipoints;
+    public void Initialize(List<Vector3> waypoints) {
+        m_Waypoints = waypoints;
     }
 
     private void Update() {
-        var target = m_Waipoints[m_CurrentWaitpointIndex];
+        var target = m_Waypoints[m_CurrentWaypointIndex];
         var dir = (target - transform.position).normalized;
 
         transform.position += dir * m_Speed * Time.deltaTime;
         transform.rotation = Quaternion.LookRotation(target);
         
-        if (Vector3.SqrMagnitude(transform.position - target) < m_NextWaipointTreshold * m_NextWaipointTreshold) {
-            m_CurrentWaitpointIndex++;
-            if (m_CurrentWaitpointIndex >= m_Waipoints.Count) {
+        if (Vector3.SqrMagnitude(transform.position - target) < m_NextWaypointTreshold * m_NextWaypointTreshold) {
+            m_CurrentWaypointIndex++;
+            if (m_CurrentWaypointIndex >= m_Waypoints.Count) {
                 Flee();
             }
         }
     }
 
     private void Flee() {
+        OnDuckFlee?.Invoke(this);
         Destroy(gameObject);
     }
 
@@ -39,9 +41,9 @@ public class DuckController : MonoBehaviour {
     }
 
     private void OnDrawGizmos() {
-        if (m_Waipoints != null)
-            for (int i = 0; i < m_Waipoints.Count - 1; i++) {
-                Gizmos.DrawLine(m_Waipoints[i], m_Waipoints[i + 1]);
+        if (m_Waypoints != null)
+            for (int i = 0; i < m_Waypoints.Count - 1; i++) {
+                Gizmos.DrawLine(m_Waypoints[i], m_Waypoints[i + 1]);
             }
     }
 }

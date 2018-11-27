@@ -6,12 +6,8 @@ public class DuckSpawner : MonoBehaviour {
     public Vector3 m_MovementBoxSize;
     public DuckController m_DuckPrefab;
 
-    private void Start() {
-        Spawn();
-        Spawn();
-    }
 
-    void Spawn() {
+    public DuckController Spawn(float duckSpeed) {
         var waypoints = new List<Vector3>();
         for (int i = 0; i < 5; i++) {
             float x = Random.Range(-m_MovementBoxSize.x, m_MovementBoxSize.x);
@@ -27,6 +23,9 @@ public class DuckSpawner : MonoBehaviour {
         var spawnPoint = new Vector3(spawnX, -m_MovementBoxSize.y, spawnZ)/2f + transform.position;
         var duck = Instantiate(m_DuckPrefab, spawnPoint, Quaternion.identity);
         duck.Initialize(waypoints);
+        duck.m_Speed = duckSpeed;
+        
+        return duck;
     }
 
 
