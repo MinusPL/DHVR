@@ -2,10 +2,13 @@
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using RoboRyanTron.Events;
 
 public class GameManager : MonoBehaviour {
     public List<RoundSettings> m_Rounds;
     public DuckSpawner m_Spawner;
+
+    public GameEvent m_OnGameEnd;
 
     private int m_CurrentRoundIndex;
     private int m_DucksLeft;
@@ -74,6 +77,7 @@ public class GameManager : MonoBehaviour {
 
     void GameOver() {
         Debug.Log("End");
+        m_OnGameEnd.Raise();
     }
 
     void OnDuckFled(DuckController duck) {

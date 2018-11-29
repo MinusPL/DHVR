@@ -31,6 +31,10 @@ public class DuckController : MonoBehaviour {
         }
     }
 
+    public float WayPercent() {
+        return (float) m_CurrentWaypointIndex / m_Waypoints.Count;
+    }
+
     private void Flee() {
         OnDuckFlee?.Invoke(this);
         Destroy(gameObject);
