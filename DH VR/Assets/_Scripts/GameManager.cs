@@ -8,12 +8,17 @@ public class GameManager : MonoBehaviour {
     public List<RoundSettings> m_Rounds;
     public DuckSpawner m_Spawner;
 
-    public GameEvent m_OnGameEnd;
+    public GameEvent m_OnGameWon;
+    public GameEvent m_OnGameLoose;
+    public GameEvent m_OnRoundStart;
+    public GameEvent m_OnDuckKilled;
 
-    private int m_CurrentRoundIndex;
+    public int m_CurrentRoundIndex { get; private set; }
     private int m_DucksLeft;
 
-    private int m_DucksKilledThisRound;
+    public int m_DucksKilledThisRound { get; private set; }
+
+    public RoundSettings CurrentSettings => m_Rounds[m_CurrentRoundIndex];
 
     private List<DuckController> m_SpawnedDucks = new List<DuckController>();
 
@@ -30,10 +35,13 @@ public class GameManager : MonoBehaviour {
         //First wait
         yield return new WaitForSeconds(2f);
 
+        bool lost = false;
+
         while (m_CurrentRoundIndex < m_Rounds.Count) {
             Debug.Log($"Round: {m_CurrentRoundIndex + 1}");
+            m_OnRoundStart.Raise();
             m_DucksKilledThisRound = 0;
-            m_DucksLeft = m_Rounds[m_CurrentRoundIndex].AllDucksCount;
+            m_DucksLeft = CurrentSettings.AllDucksCount;
 
             while (m_DucksLeft > 0) {
                 yield return new WaitForSeconds(4f);
@@ -43,9 +51,11 @@ public class GameManager : MonoBehaviour {
                 yield return new WaitUntil(() => m_SpawnedDucks.Count == 0);
                 Debug.Log($"End Stage. Ducks left: {m_DucksLeft}");
             }
-            Debug.Log($"Killed: {m_DucksKilledThisRound} To Kill: {m_Rounds[m_CurrentRoundIndex].DucksToNextRound}");
-            if (m_DucksKilledThisRound < m_Rounds[m_CurrentRoundIndex].DucksToNextRound) {
+            Debug.Log($"Killed: {m_DucksKilledThisRound} To Kill: {CurrentSettings.DucksToNextRound}");
+            if (m_DucksKilledThisRound < CurrentSettings.DucksToNextRound) {
                 Debug.Log("You Lost");
+                m_OnGameLoose.Raise();
+                lost = true;
                 break;
             }
 
@@ -54,7 +64,8 @@ public class GameManager : MonoBehaviour {
             yield return new WaitForSeconds(5f);
         }
         
-        GameOver();
+        if(!lost)
+            GameWon();
     }
 
     public void GameStart() {
@@ -67,17 +78,17 @@ public class GameManager : MonoBehaviour {
         //Spawn ducks
         //add them to list
         //decrement ducks left
-        for (int i = 0; i < m_Rounds[m_CurrentRoundIndex].DucksPerStage && m_DucksLeft > 0; i++) {
-            var duck = m_Spawner.Spawn( m_Rounds[m_CurrentRoundIndex].DucksSpeed);
+        for (int i = 0; i < CurrentSettings.DucksPerStage && m_DucksLeft > 0; i++) {
+            var duck = m_Spawner.Spawn( CurrentSettings.DucksSpeed);
             m_SpawnedDucks.Add(duck);
 
             m_DucksLeft--;
         }
     }
 
-    void GameOver() {
+    void GameWon() {
         Debug.Log("End");
-        m_OnGameEnd.Raise();
+        m_OnGameWon.Raise();
     }
 
     void OnDuckFled(DuckController duck) {
@@ -87,5 +98,7 @@ public class GameManager : MonoBehaviour {
     void OnDuckKill(DuckController duck) {
         m_SpawnedDucks.Remove(duck);
         m_DucksKilledThisRound++;
+        
+        m_OnDuckKilled.Raise();
     }
 }

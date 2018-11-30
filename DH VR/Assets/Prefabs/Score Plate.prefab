@@ -167,9 +167,7 @@ GameObject:
   - component: {fileID: 4178198672331271900}
   - component: {fileID: 4178198672332566268}
   - component: {fileID: 4178198672333696060}
-  - component: {fileID: 5661906374750359009}
   - component: {fileID: 5406039506087566138}
-  - component: {fileID: 2243656783019585678}
   m_Layer: 9
   m_Name: log_small
   m_TagString: Untagged
@@ -237,22 +235,6 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!54 &5661906374750359009
-Rigidbody:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4178198672331764476}
-  serializedVersion: 2
-  m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 0.05
-  m_UseGravity: 1
-  m_IsKinematic: 0
-  m_Interpolate: 0
-  m_Constraints: 0
-  m_CollisionDetection: 0
 --- !u!64 &5406039506087566138
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -267,20 +249,6 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: 14
   m_Mesh: {fileID: 4300000, guid: c9a9552731d8fb243b5ef4fc2e741fea, type: 3}
---- !u!114 &2243656783019585678
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4178198672331764476}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f3a6359dd23da8f47bd1c85b5cf95a98, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_KeepTransform: 1
-  m_Highlight: {fileID: 0}
 --- !u!1 &7644237787805534277
 GameObject:
   m_ObjectHideFlags: 0
@@ -374,6 +342,7 @@ GameObject:
   - component: {fileID: 4335264851974025155}
   - component: {fileID: 355282113149584179}
   - component: {fileID: 8529458170902608310}
+  - component: {fileID: 279538215388728760}
   m_Layer: 0
   m_Name: Score Plate
   m_TagString: Untagged
@@ -425,6 +394,35 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Event: {fileID: 11400000, guid: fa025be0e6fc9cf4298164af82d777e6, type: 2}
+  Response:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 355282113149584179}
+        m_MethodName: SaveScore
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+--- !u!114 &279538215388728760
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7974638832724008263}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3e839e4c12473014b9b3d3faccc0f61d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Event: {fileID: 11400000, guid: 4febc45f1755ad647b155e709b257fc9, type: 2}
   Response:
     m_PersistentCalls:
       m_Calls:
