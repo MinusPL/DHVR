@@ -1,23 +1,17 @@
 - GameManager
-    - Stages
-    - max ducks per stage
-    - waves per stage
     - max ammo per stage
     - difficulty change
 
 - Duck !
-    - Waypoints
-    - Waypoint movement
     - Animations
-
-- Duck Spawner 
+    - Better movement
 
 - Score Manager
-    - On Duck Kill
-    - Based on duck lifetime 
     - Based on fired bullets
 
 - More interactions 
+
+- Inteface
 
 Each round consists of a total of ten targets to shoot. Depending on the game mode the player selects prior to beginning play, 
 one or two targets will appear on the screen at any given time and the player has three shots, or attempts, to hit them 
