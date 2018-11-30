@@ -8,8 +8,11 @@ public class GameManager : MonoBehaviour {
     public List<RoundSettings> m_Rounds;
     public DuckSpawner m_Spawner;
 
+    [Header("Events")] 
+    public GameEvent m_OnGameStart;
     public GameEvent m_OnGameWon;
     public GameEvent m_OnGameLoose;
+    public GameEvent m_OnStageStart;
     public GameEvent m_OnRoundStart;
     public GameEvent m_OnDuckKilled;
 
@@ -36,7 +39,8 @@ public class GameManager : MonoBehaviour {
         yield return new WaitForSeconds(2f);
 
         bool lost = false;
-
+        m_OnGameStart.Raise();
+        
         while (m_CurrentRoundIndex < m_Rounds.Count) {
             Debug.Log($"Round: {m_CurrentRoundIndex + 1}");
             m_OnRoundStart.Raise();
@@ -78,6 +82,7 @@ public class GameManager : MonoBehaviour {
         //Spawn ducks
         //add them to list
         //decrement ducks left
+        m_OnStageStart.Raise();
         for (int i = 0; i < CurrentSettings.DucksPerStage && m_DucksLeft > 0; i++) {
             var duck = m_Spawner.Spawn( CurrentSettings.DucksSpeed);
             m_SpawnedDucks.Add(duck);
