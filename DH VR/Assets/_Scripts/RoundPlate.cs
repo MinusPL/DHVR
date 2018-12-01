@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using RoboRyanTron.Variables;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -10,10 +11,17 @@ public class RoundPlate : MonoBehaviour {
     public Text m_ToGoCounter;
     public Text m_KilledCounter;
     public Text m_StatusText;
+    public Text m_ScoreText;
+
+    public FloatVariable m_CurrentScore;
 
     public void UpdateDucksCount() {
         var toGoStr = new String('I', m_Manager.m_DucksKilledThisRound);
         m_KilledCounter.text = toGoStr;
+    }
+
+    public void UpdateScore() {
+        m_ScoreText.text = $"Current Score: {m_CurrentScore.Value}";
     }
 
     public void UpdateRoundAndToGoText() {

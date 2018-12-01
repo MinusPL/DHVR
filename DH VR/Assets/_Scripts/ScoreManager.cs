@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using RoboRyanTron.Variables;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -12,7 +13,7 @@ public class ScoreManager : MonoBehaviour {
     public int m_KeepedScoreCount = 10;
     public Text m_ScoreListText;
     
-    private int m_CurrentScore;
+    public FloatVariable m_CurrentScore;
 
     private List<ScoreData> m_ScoresData = new List<ScoreData>();
     
@@ -27,7 +28,7 @@ public class ScoreManager : MonoBehaviour {
 
     void OnDuckKill(DuckController duck) {
         var scoreKeeper = duck.GetComponent<DuckScoreKeeper>();
-        m_CurrentScore += scoreKeeper.GetScore();
+        m_CurrentScore.ApplyChange(scoreKeeper.GetScore());
     }
 
     void LoadData() {
@@ -48,6 +49,10 @@ public class ScoreManager : MonoBehaviour {
         UpdateText();
     }
 
+    public void ResetScore() {
+        m_CurrentScore.Value = 0;
+    }
+
     void UpdateText() {
         m_ScoresData = m_ScoresData.OrderByDescending(d => d.score).ToList();
         
@@ -63,7 +68,7 @@ public class ScoreManager : MonoBehaviour {
         var scoreData = new ScoreData() {
             name = "test1",
             round = 0,
-            score = m_CurrentScore
+            score = Mathf.RoundToInt(m_CurrentScore.Value)
         };
         
         m_ScoresData.Add(scoreData);
