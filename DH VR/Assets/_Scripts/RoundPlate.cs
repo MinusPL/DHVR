@@ -24,6 +24,13 @@ public class RoundPlate : MonoBehaviour {
         m_ToGoCounter.text = toGoStr;
     }
 
+    public void ResetText() {
+        m_RoundsText.text = "Round: 0";
+
+        m_ToGoCounter.text = "";
+        m_KilledCounter.text = "";
+    }
+
     public void SetStatusText(string str) {
         m_StatusText.text = str;
     }

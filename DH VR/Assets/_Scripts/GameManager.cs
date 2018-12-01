@@ -10,6 +10,7 @@ public class GameManager : MonoBehaviour {
 
     [Header("Events")] 
     public GameEvent m_OnGameStart;
+    public GameEvent m_OnGameStop;
     public GameEvent m_OnGameWon;
     public GameEvent m_OnGameLoose;
     public GameEvent m_OnStageStart;
@@ -80,6 +81,9 @@ public class GameManager : MonoBehaviour {
         if (m_GameStarted) {
             m_GameStarted = false;
             StopAllCoroutines();
+
+            m_DucksKilledThisRound = 0;
+            m_OnGameStop.Raise();
         }
         else {
             GameStart();
