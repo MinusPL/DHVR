@@ -25,13 +25,15 @@ public class GameManager : MonoBehaviour {
 
     private List<DuckController> m_SpawnedDucks = new List<DuckController>();
 
+    private bool m_GameStarted = false;
+
     private void Awake() {
         DuckController.OnDuckDeath += OnDuckKill;
         DuckController.OnDuckFlee += OnDuckFled;
     }
 
     private void Start() {
-        GameStart();
+        //GameStart();
     }
 
     IEnumerator GameRoutine() {
@@ -70,9 +72,23 @@ public class GameManager : MonoBehaviour {
         
         if(!lost)
             GameWon();
+
+        m_GameStarted = false;
     }
 
-    public void GameStart() {
+    public void StartStopGame() {
+        if (m_GameStarted) {
+            m_GameStarted = false;
+            StopAllCoroutines();
+        }
+        else {
+            GameStart();
+        }
+    }
+
+    void GameStart() {
+        m_GameStarted = true;
+        
         m_CurrentRoundIndex = 0;
         StartCoroutine(GameRoutine());
     }
