@@ -25,7 +25,7 @@ public class RoundPlate : MonoBehaviour {
     }
 
     public void UpdateRoundAndToGoText() {
-        var toGoStr = new String('I', m_Manager.CurrentSettings.AllDucksCount);
+        var toGoStr = new String('I', m_Manager.CurrentSettings.DucksToNextRound);
         var roundStr = $"Round: {m_Manager.m_CurrentRoundIndex + 1}";
 
         m_RoundsText.text = roundStr;
