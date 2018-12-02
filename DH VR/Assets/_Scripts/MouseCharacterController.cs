@@ -39,7 +39,7 @@ public class MouseCharacterController : MonoBehaviour {
         Ray ray = new Ray(m_CameraTransform.position, m_CameraTransform.forward);
         RaycastHit hit;
         if (Physics.Raycast(ray, out hit, m_GrabDistance, m_GrabableMask)) {
-            m_PointedItem = hit.collider.GetComponent<Grabable>();
+            m_PointedItem = hit.collider.GetComponentInParent<Grabable>();
             if (m_PointedItem) {
                 m_PointedItem.Highlight(true);
             }

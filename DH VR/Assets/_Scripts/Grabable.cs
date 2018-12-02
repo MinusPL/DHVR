@@ -6,15 +6,21 @@ using UnityEngine.Events;
 public class Grabable : MonoBehaviour {
     public bool m_KeepTransform;
     public GameObject m_Highlight;
+    public List<Collider> m_CollidersToDisable;
+    public bool m_AddThisCollider = true;
     
     private Rigidbody m_Body;
-    private Collider m_Collider;
 
     private Vector3 m_PreviousPosition;
 
     private void Awake() {
         m_Body = GetComponent<Rigidbody>();
-        m_Collider = GetComponent<Collider>();
+        if (m_AddThisCollider) {
+            var coll = GetComponent<Collider>();
+            if (coll) {
+                m_CollidersToDisable.Add(coll);
+            }
+        }
     }
 
     private void LateUpdate() {
@@ -29,8 +35,9 @@ public class Grabable : MonoBehaviour {
     public void Grab(Transform parent) {
         if (m_Body)
             m_Body.isKinematic = true;
-        if (m_Collider)
-            m_Collider.enabled = false;
+        foreach (var coll in m_CollidersToDisable) {
+            coll.enabled = false;
+        }
 
         transform.SetParent(parent);
         if (!m_KeepTransform) {
@@ -49,7 +56,8 @@ public class Grabable : MonoBehaviour {
             m_Body.AddForce(force, ForceMode.Impulse);
         }
 
-        if (m_Collider)
-            m_Collider.enabled = true;
+        foreach (var coll in m_CollidersToDisable) {
+            coll.enabled = true;
+        }
     }
 }
