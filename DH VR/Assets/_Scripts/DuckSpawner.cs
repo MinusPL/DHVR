@@ -7,6 +7,7 @@ public class DuckSpawner : MonoBehaviour {
     public Transform m_SpawnOrigin;
     public Vector2 m_SpawnPlaneSize;
     public DuckController m_DuckPrefab;
+    public List<Transform> m_FleeWaypoints;
 
 
     public DuckController Spawn(float duckSpeed) {
@@ -20,6 +21,9 @@ public class DuckSpawner : MonoBehaviour {
             waypoints.Add(point);
         }
 
+        int index = Random.Range(0, m_FleeWaypoints.Count - 1);
+        waypoints.Add(m_FleeWaypoints[index].position);
+        
         float spawnX = Random.Range(-m_SpawnPlaneSize.x, m_SpawnPlaneSize.x);
         float spawnZ = Random.Range(-m_SpawnPlaneSize.y, m_SpawnPlaneSize.y);
 
