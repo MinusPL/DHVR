@@ -44,6 +44,10 @@ public class DuckController : MonoBehaviour {
         OnDuckDeath?.Invoke(this);
     }
 
+    public void JustDestroy() {
+        Destroy(gameObject);
+    }
+
     private void OnDrawGizmos() {
         if (m_Waypoints != null)
             for (int i = 0; i < m_Waypoints.Count - 1; i++) {

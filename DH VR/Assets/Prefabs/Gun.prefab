@@ -9913,6 +9913,7 @@ GameObject:
   - component: {fileID: 4000511556581194491}
   - component: {fileID: 8736623011727338067}
   - component: {fileID: 6113115046170388853}
+  - component: {fileID: 8347239449056880072}
   m_Layer: 9
   m_Name: Gun
   m_TagString: Untagged
@@ -9989,6 +9990,7 @@ MonoBehaviour:
   m_FireParticle: {fileID: 1001001959832905841}
   m_LineRenderer: {fileID: 1885582364717610378}
   m_LineDisplayTime: 0.1
+  m_FireRadius: 0.1
 --- !u!114 &1972327431343494085
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10181,8 +10183,31 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 1
         m_CallState: 2
+      - m_Target: {fileID: 8347239449056880072}
+        m_MethodName: ResetTransform
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
     m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
       Culture=neutral, PublicKeyToken=null
+--- !u!114 &8347239449056880072
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3898618445298644582}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c76ef09ae33c55c41ac5ac27f50b6edc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &4263409489458246070
 GameObject:
   m_ObjectHideFlags: 0
