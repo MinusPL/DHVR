@@ -14,7 +14,9 @@ GameObject:
   - component: {fileID: 4418379098213542576}
   - component: {fileID: 7354323386445931049}
   - component: {fileID: 1447912653584015464}
-  m_Layer: 0
+  - component: {fileID: 7909566462748772145}
+  - component: {fileID: 6597537167619915832}
+  m_Layer: 9
   m_Name: pumpkin
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -28,9 +30,9 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1882997966786743431}
-  m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -53, y: 0, z: 53.02755}
-  m_LocalScale: {x: 0.43, y: 0.43, z: 0.43}
+  m_LocalScale: {x: 0.17192158, y: 0.17192158, z: 0.17192158}
   m_Children:
   - {fileID: 2442880509852620159}
   m_Father: {fileID: 0}
@@ -127,6 +129,51 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_KeepTransform: 1
   m_Highlight: {fileID: 7754964508950634084}
+  m_CollidersToDisable: []
+  m_AddThisCollider: 1
+--- !u!114 &7909566462748772145
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1882997966786743431}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 97daf4d7c7e8785419a6df030e5e5129, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_MaxHealth: 1
+  m_OnDeath:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 6597537167619915832}
+        m_MethodName: Spawn
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+--- !u!114 &6597537167619915832
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1882997966786743431}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2d862fbf9c221604ca7920dd8fe36e36, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_ParticleSystem: {fileID: 4125592591213231137, guid: c54d06b49f2f6c94091e244895ce729b,
+    type: 3}
 --- !u!1 &7754964508950634084
 GameObject:
   m_ObjectHideFlags: 0
@@ -138,7 +185,7 @@ GameObject:
   - component: {fileID: 2442880509852620159}
   - component: {fileID: 7541672478236796134}
   - component: {fileID: 4756378868133310003}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: pumpkin
   m_TagString: Untagged
   m_Icon: {fileID: 0}

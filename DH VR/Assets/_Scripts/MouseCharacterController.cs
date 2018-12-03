@@ -9,8 +9,10 @@ public class MouseCharacterController : MonoBehaviour {
     public float m_MoveSpeed;
     public float m_Gravity;
     public float m_JumpForce;
+    public Vector2 m_PitchClamp;
     public LayerMask m_GrabableMask;
     public Transform m_GrabHook;
+    public float m_GrabDistance = 1.3f;
     
     private Transform m_CameraTransform;
     private CharacterController m_Controller;
@@ -36,8 +38,8 @@ public class MouseCharacterController : MonoBehaviour {
         
         Ray ray = new Ray(m_CameraTransform.position, m_CameraTransform.forward);
         RaycastHit hit;
-        if (Physics.Raycast(ray, out hit, m_GrabableMask)) {
-            m_PointedItem = hit.collider.GetComponent<Grabable>();
+        if (Physics.Raycast(ray, out hit, m_GrabDistance, m_GrabableMask)) {
+            m_PointedItem = hit.collider.GetComponentInParent<Grabable>();
             if (m_PointedItem) {
                 m_PointedItem.Highlight(true);
             }
@@ -60,6 +62,14 @@ public class MouseCharacterController : MonoBehaviour {
             m_GrabbedItem.Release();
             m_GrabbedItem = null;
         }
+
+        if (Input.GetKeyDown(KeyCode.E) && hit.collider) {
+            //Debug.Log(hit.collider.gameObject.name);
+            var button = hit.collider.GetComponentInParent<BigButton>();
+            if (button) {
+                button.Push();
+            }
+        }
     }
 
     void HandleMovement() {
@@ -68,6 +78,8 @@ public class MouseCharacterController : MonoBehaviour {
         
         transform.Rotate(Vector3.up * mouseInput.x * m_MoseSensitivity.x);
         m_Pitch += mouseInput.y * m_MoseSensitivity.y;
+
+        m_Pitch = Mathf.Clamp(m_Pitch, m_PitchClamp.x, m_PitchClamp.y);
         
         m_CameraTransform.localRotation = Quaternion.AngleAxis(m_Pitch, Vector3.left);
 

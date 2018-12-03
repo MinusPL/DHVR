@@ -31,6 +31,10 @@ public class DuckController : MonoBehaviour {
         }
     }
 
+    public float WayPercent() {
+        return 1f - ((float) m_CurrentWaypointIndex / m_Waypoints.Count);
+    }
+
     private void Flee() {
         OnDuckFlee?.Invoke(this);
         Destroy(gameObject);
@@ -38,6 +42,10 @@ public class DuckController : MonoBehaviour {
 
     public void Death() {
         OnDuckDeath?.Invoke(this);
+    }
+
+    public void JustDestroy() {
+        Destroy(gameObject);
     }
 
     private void OnDrawGizmos() {
