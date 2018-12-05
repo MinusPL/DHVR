@@ -14,6 +14,7 @@ public class VRCharacterController : MonoBehaviour
     public SteamVR_TrackedController m_Controller;
 
     List<Grabable> m_NearObject = new List<Grabable>();
+    List<BigButton> m_NearButtons = new List<BigButton>();
     Grabable m_Grabbed;
 
     Gun m_Gun;
@@ -33,6 +34,10 @@ public class VRCharacterController : MonoBehaviour
             m_Line.SetPosition(0, transform.position);
             m_Line.SetPosition(1, transform.position + transform.forward * 10f);
         }
+
+        if(m_NearObject.Any()){
+            m_NearObject[0].Highlight(true);
+        }
     }
 
     void SelectPosition(object sender, ClickedEventArgs e)
@@ -46,7 +51,7 @@ public class VRCharacterController : MonoBehaviour
         Ray ray = new Ray(transform.position, transform.forward);
         RaycastHit hit;
 
-        if (Physics.Raycast(ray, out hit, m_FloorMask))
+        if (Physics.Raycast(ray, out hit, float.PositiveInfinity, m_FloorMask))
         {
             transform.parent.position = hit.point;
         }
@@ -57,6 +62,10 @@ public class VRCharacterController : MonoBehaviour
         if (m_Gun)
         {
             m_Gun.Fire();
+        }
+        else if(m_NearButtons.Any())
+        {
+            m_NearButtons[0].Push();
         }
     }
 
@@ -96,19 +105,30 @@ public class VRCharacterController : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        var grabable = other.GetComponent<Grabable>();
+        var grabable = other.GetComponentInParent<Grabable>();
         if (grabable)
         {
             m_NearObject.Add(grabable);
+        }
+
+        var button = other.GetComponentInParent<BigButton>();
+        if(button){
+            m_NearButtons.Add(button);
         }
     }
 
     private void OnTriggerExit(Collider other)
     {
-        var grabable = other.GetComponent<Grabable>();
+        var grabable = other.GetComponentInParent<Grabable>();
         if (grabable)
         {
             m_NearObject.Remove(grabable);
+            grabable.Highlight(false);
+        }
+
+        var button = other.GetComponentInParent<BigButton>();
+        if(button){
+            m_NearButtons.Remove(button);
         }
     }
 }

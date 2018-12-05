@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 43e0c9df5c141c648aae503671b0a50d, type: 3}
   m_Name: Round 7
   m_EditorClassIdentifier: 
-  AllDucksCount: 10
+  AllDucksCount: 15
   DucksPerStage: 3
   DucksToNextRound: 9
   DucksSpeed: 8

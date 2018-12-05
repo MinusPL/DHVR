@@ -39,7 +39,7 @@ public class GameManager : MonoBehaviour {
 
     IEnumerator GameRoutine() {
         //First wait
-        yield return new WaitForSeconds(2f);
+        yield return new WaitForSeconds(1f);
 
         bool lost = false;
         m_OnGameStart.Raise();
@@ -51,7 +51,7 @@ public class GameManager : MonoBehaviour {
             m_DucksLeft = CurrentSettings.AllDucksCount;
 
             while (m_DucksLeft > 0) {
-                yield return new WaitForSeconds(4f);
+                yield return new WaitForSeconds(2f);
 
                 StageStart();
                 
